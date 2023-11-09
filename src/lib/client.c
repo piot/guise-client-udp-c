@@ -1,3 +1,7 @@
+/*----------------------------------------------------------------------------------------------------------
+ *  Copyright (c) Peter Bjorklund. All rights reserved. https://github.com/piot/guise-client-udp-c
+ *  Licensed under the MIT License. See LICENSE in the project root for license information.
+ *--------------------------------------------------------------------------------------------------------*/
 #include <guise-client-udp/client.h>
 #include <guise-client-udp/read_secret.h>
 #include <udp-client/udp_client.h>
