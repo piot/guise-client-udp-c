@@ -3,12 +3,14 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------------------*/
 #include <clog/clog.h>
-#include <flood/text_in_stream.h>
 #include <flood/in_stream.h>
-
+#include <flood/text_in_stream.h>
 #include <guise-client-udp/read_secret.h>
 #include <guise-serialize/parse_text.h>
 
+/// Reads secret user.txt file according to the format specified here https://github.com/piot/guise-daemon#userstxt
+/// @param secret first secret found in file
+/// @return negative on error, positve otherwise
 int guiseClientUdpReadSecret(GuiseClientUdpSecret* secret)
 {
     CLOG_DEBUG("reading secret file")
