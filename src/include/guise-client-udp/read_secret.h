@@ -12,6 +12,6 @@ typedef struct GuiseClientUdpSecret {
     uint64_t passwordHash;
 } GuiseClientUdpSecret;
 
-int guiseClientUdpReadSecret(GuiseClientUdpSecret* secret);
+int guiseClientUdpReadSecret(GuiseClientUdpSecret* secret, size_t index);
 
 #endif

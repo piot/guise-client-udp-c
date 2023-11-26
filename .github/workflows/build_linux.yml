@@ -38,6 +38,6 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: Guise Client Linux Library
+          name: Guise Client UDP Linux Library
           path: |
-            src/lib/libguise-client.a
+            src/lib/libguise-client-udp.a

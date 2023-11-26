@@ -2,3 +2,7 @@
 .vscode/
 cmake-build*/
 users.txt
+CMakeFiles/
+*.a
+Makefile
+cmake_install.cmake

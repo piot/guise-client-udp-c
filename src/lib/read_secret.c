@@ -11,7 +11,7 @@
 /// Reads secret user.txt file according to the format specified here https://github.com/piot/guise-daemon#userstxt
 /// @param secret first secret found in file
 /// @return negative on error, positve otherwise
-int guiseClientUdpReadSecret(GuiseClientUdpSecret* secret)
+int guiseClientUdpReadSecret(GuiseClientUdpSecret* secret, size_t index)
 {
     CLOG_DEBUG("reading secret file")
     FILE* fp = fopen("users.txt", "r");
@@ -20,25 +20,28 @@ int guiseClientUdpReadSecret(GuiseClientUdpSecret* secret)
         //        return -4;
     }
 
-    char line[1024];
-    char* ptr = fgets(line, 1024, fp);
-    if (ptr == 0) {
-        return -39;
-    }
-    fclose(fp);
-
     FldTextInStream textInStream;
     FldInStream inStream;
 
-    fldInStreamInit(&inStream, (const uint8_t*)line, tc_strlen(line));
-    fldTextInStreamInit(&textInStream, &inStream);
+    char line[1024];
 
     GuiseSerializeUserInfo userInfo;
+    for (size_t i = 0; i <= index; ++i) {
+        char* ptr = fgets(line, 1024, fp);
+        if (ptr == 0) {
+            return -39;
+        }
+        fldInStreamInit(&inStream, (const uint8_t*)line, tc_strlen(line));
+        fldTextInStreamInit(&textInStream, &inStream);
 
-    int err = guiseTextStreamReadUser(&textInStream, &userInfo);
-    if (err < 0) {
-        return err;
+        int err = guiseTextStreamReadUser(&textInStream, &userInfo);
+        if (err < 0) {
+            fclose(fp);
+            return err;
+        }
     }
+
+    fclose(fp);
 
     secret->userId = userInfo.userId;
     secret->passwordHash = userInfo.passwordHash;
